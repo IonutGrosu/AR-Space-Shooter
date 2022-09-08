@@ -7,6 +7,8 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
 
     public GameObject bulletPrefab;
+    float timer;
+    int waitingTime = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Update is called once per frame
+
     void Update()
     {
         Shoot();
@@ -21,6 +24,11 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        timer += Time.deltaTime;
+        if(timer > waitingTime){
+            //Action
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            timer = 0;
+        }
     }
 }
